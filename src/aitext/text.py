@@ -7,9 +7,9 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
-# ---------------------------------------------------
+
 # 1. LOAD API KEY
-# ---------------------------------------------------
+
 
 load_dotenv()
 
@@ -19,9 +19,9 @@ if not groq_api_key:
     raise ValueError("GROQ_API_KEY is not found.")
 
 
-# ---------------------------------------------------
+
 # 2. INITIALIZE THE LLM
-# ---------------------------------------------------
+
 
 llm = ChatGroq(
     model="openai/gpt-oss-120b",
@@ -30,9 +30,9 @@ llm = ChatGroq(
 )
 
 
-# ---------------------------------------------------
+
 # 3. CREATE PROMPT TEMPLATE
-# ---------------------------------------------------
+
 
 prompt = ChatPromptTemplate.from_messages([
     (
@@ -60,23 +60,22 @@ Summarize the following text:
 ])
 
 
-# ---------------------------------------------------
 # 4. CREATE OUTPUT PARSER
-# ---------------------------------------------------
+
 
 parser = StrOutputParser()
 
 
-# ---------------------------------------------------
+
 # 5. CREATE LANGCHAIN CHAIN
-# ---------------------------------------------------
+
 
 summary_chain = prompt | llm | parser
 
 
-# ---------------------------------------------------
+
 # 6. CREATE TEXT SPLITTER
-# ---------------------------------------------------
+
 
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=3000,
@@ -84,9 +83,8 @@ text_splitter = RecursiveCharacterTextSplitter(
 )
 
 
-# ---------------------------------------------------
 # 7. GET TEXT FROM USER
-# ---------------------------------------------------
+
 
 def get_user_text():
 
@@ -118,9 +116,9 @@ def get_user_text():
     return text
 
 
-# ---------------------------------------------------
+
 # 8. SUMMARIZE TEXT
-# ---------------------------------------------------
+
 
 def summarize_text(text):
 
@@ -160,9 +158,9 @@ def summarize_text(text):
     return final_summary
 
 
-# ---------------------------------------------------
+
 # 9. MAIN PROGRAM
-# ---------------------------------------------------
+
 
 def main():
 
@@ -182,9 +180,9 @@ def main():
     print(summary)
 
 
-# ---------------------------------------------------
+
 # 10. RUN PROGRAM
-# ---------------------------------------------------
+
 
 if __name__ == "__main__":
     main()
